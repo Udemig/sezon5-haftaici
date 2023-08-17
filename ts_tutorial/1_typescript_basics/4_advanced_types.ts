@@ -84,7 +84,7 @@ category_1.data.push({
 ////////////////////////////////////////////
 // ödev: Bu type'ı kullanarak iki adet değişken oluşturun ve bu değişkenlerin
 // değerleri farklı olsun.
-type ApiLoginResult = {
+type ApiLoginResult_1 = {
   data: {
     token: string;
     userData: {
