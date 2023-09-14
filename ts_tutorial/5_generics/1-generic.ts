@@ -24,9 +24,12 @@ console.log(newNumbers, newStrings);
 //* Fonksiyonlarda generic olunca
 // TypeParam ismi, fonksiyonun çağrıldığı her yerde belirli bir veri tütüne dönüşücektir.
 // Bu kullanım tür güvenliği sağlar
-function reverseArrayV2<TypeParam>(array: TypeParam[]): TypeParam[] {
+function reverseArrayV2<DISARIDAN_TYPE>(
+  array: DISARIDAN_TYPE[]
+): DISARIDAN_TYPE[] {
   return array.reverse();
 }
 
 const newNumbersV2 = reverseArrayV2<number>(numbers);
 const newStringsV2 = reverseArrayV2<string>(strings);
+const newBooolean = reverseArrayV2<boolean>([true, false, false]);
