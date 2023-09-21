@@ -42,7 +42,7 @@ export const makes = [
   'Volvo',
 ];
 
-export const yearsOfProduction = [
+export const years = [
   { label: 'Yıl', value: '' },
   { label: '2015', value: '2015' },
   { label: '2016', value: '2016' },
@@ -67,6 +67,10 @@ export const fuels = [
   {
     label: 'Elektrik',
     value: 'Electricity',
+  },
+  {
+    label: 'Dizel',
+    value: 'Diesel',
   },
 ];
 
