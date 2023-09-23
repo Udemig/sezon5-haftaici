@@ -11,7 +11,6 @@ import { Tag } from './types';
 import { Link } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import ReactSelect from 'react-select';
-import ReactMarkdown from 'react-markdown';
 
 type NoteType = {
   tags: Tag[];

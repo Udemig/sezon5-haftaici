@@ -7,6 +7,9 @@ import { NoteData, RawNote, Tag } from './types';
 import { useLocaleStorage } from './useLocaleStorage';
 import { v4 } from 'uuid';
 import MainPage from './MainPage';
+import Layout from './components/NoteDetail/Layout';
+import NoteDetail from './components/NoteDetail/NoteDetail';
+import EditNote from './components/Form/EditNote';
 
 function App() {
   const [notes, setNotes] = useLocaleStorage<RawNote[]>('notes', []);
@@ -38,6 +41,32 @@ function App() {
     setTags((prev) => [...prev, tag]);
   }
 
+  //elemanı siler
+  function onDeleteNote(id: string) {
+    setNotes((prevNotes) => {
+      return prevNotes.filter((n) => n.id !== id);
+    });
+  }
+
+  // elemanı günceller
+  function onUpdateNote(id: string, { tags, ...data }: NoteData) {
+    setNotes((prev) => {
+      return prev.map((n) => {
+        // dizideki eleman güncellenicek not ise
+        // bütün değerlerini değiştir
+        if (n.id === id) {
+          return {
+            ...n,
+            ...data,
+            tagIds: tags.map((tag) => tag.id),
+          };
+        } else {
+          return n;
+        }
+      });
+    });
+  }
+
   return (
     <Container className="my-4">
       <Routes>
@@ -58,9 +87,21 @@ function App() {
           }
         />
 
-        <Route path="/:id">
-          <Route index element={<h1>Detay Sayfası</h1>} />
-          <Route path="edit" element={<h1>Düzenleme</h1>} />
+        <Route path="/:id" element={<Layout notes={noteWithTags} />}>
+          <Route
+            index
+            element={<NoteDetail onDeleteNote={onDeleteNote} />}
+          />
+          <Route
+            path="edit"
+            element={
+              <EditNote
+                onSubmit={onUpdateNote}
+                onAddTag={addTag}
+                availableTags={tags}
+              />
+            }
+          />
         </Route>
 
         <Route path="*" element={<Navigate to={'/'} />} />

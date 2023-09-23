@@ -6,18 +6,17 @@ import { NewNoteProps } from './NewNote';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 
-type NoteFormProps = {
-  onSubmit: (data: NoteData) => void;
-};
-
 const NoteForm = ({
   onSubmit,
   addTag,
   availableTags,
+  title = '',
+  markdown = '',
+  tags = [],
 }: NewNoteProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
   const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
@@ -45,6 +44,7 @@ const NoteForm = ({
                 ref={titleRef}
                 required
                 className="shadow"
+                defaultValue={title}
               />
             </Form.Group>
           </Col>
@@ -87,6 +87,7 @@ const NoteForm = ({
         <Form.Group controlId="markdown">
           <Form.Label>İçeirk</Form.Label>
           <Form.Control
+            defaultValue={markdown}
             ref={markdownRef}
             as={'textarea'}
             rows={15}
